@@ -49,17 +49,17 @@
 
 // Uncomment this lines to connect to an external Wifi router (join an existing Wifi network)
 // #define EXTERNAL_WIFI
-// #define WIFI_SSID "SpeedyGonzales"
-// #define WIFI_PASSWORD "a1b2c3d4"
-// #define WIFI_IP "192.168.2.101"  // Force ROBOT IP
-// #define TELEMETRY "192.168.2.38" // Tlemetry server port 2223
+// #define WIFI_SSID "HUAWEI Mate 20 lite"
+// #define WIFI_PASSWORD "12345678"
+// #define WIFI_IP "192.168.43.101"  // Force ROBOT IP
+// #define TELEMETRY "192.168.43.38" // Tlemetry server port 2223
 
 #define TELEMETRY "192.168.4.2" // Default telemetry server (first client) port 2223
 
 // NORMAL MODE PARAMETERS (MAXIMUN SETTINGS)
-#define MAX_THROTTLE 550
-#define MAX_STEERING 140
-#define MAX_TARGET_ANGLE 14
+#define MAX_THROTTLE 250    //ursprünglich 550
+#define MAX_STEERING 80    //ursprünglich 140
+#define MAX_TARGET_ANGLE 10 //ursprünglich 14
 
 // PRO MODE = MORE AGGRESSIVE (MAXIMUN SETTINGS)
 #define MAX_THROTTLE_PRO 780   // Max recommended value: 860
@@ -67,8 +67,8 @@
 #define MAX_TARGET_ANGLE_PRO 24   // Max recommended value: 32
 
 // Default control terms for EVO 2
-#define KP 0.32       
-#define KD 0.10     // ursprünglich 0.050
+#define KP 0.32     //urspünglich 0.32  
+#define KD 0.15     // ursprünglich 0.050
 #define KP_THROTTLE 0.080 
 #define KI_THROTTLE 0.1 
 #define KP_POSITION 0.06  
@@ -76,8 +76,8 @@
 //#define KI_POSITION 0.02
 
 // Control gains for raiseup (the raiseup movement requiere special control parameters)
-#define KP_RAISEUP 0.1   
-#define KD_RAISEUP 0.16   
+#define KP_RAISEUP 0.1   //ursprünglich 0.1
+#define KD_RAISEUP 0.16  //ursprünglich 0.16 
 #define KP_THROTTLE_RAISEUP 0   // No speed control on raiseup
 #define KI_THROTTLE_RAISEUP 0.0
 
@@ -510,7 +510,7 @@ void loop()
     if (OSCpush[0])     // If we press the SERVO button we start to move
       angle_ready = 82;
     else
-      angle_ready = 74;  // Default angle
+      angle_ready = 54;  // Default angle 74
     if ((angle_adjusted < angle_ready) && (angle_adjusted > -angle_ready)) // Is robot ready (upright?)
     {
       // NORMAL MODE
@@ -549,8 +549,8 @@ void loop()
     // else
     //   BROBOT_moveServo1(SERVO_AUX_NEUTRO);
 
-    // // Servo2
-    // BROBOT_moveServo2(SERVO2_NEUTRO + (OSCfader[2] - 0.5) * SERVO2_RANGE);
+    // Servo2
+    BROBOT_moveServo2(SERVO2_NEUTRO + (OSCfader[2] - 0.5) * SERVO2_RANGE);
 
     // Normal condition?
     if ((angle_adjusted < 56) && (angle_adjusted > -56))
